@@ -1,4 +1,6 @@
-<div class="nested-fields" style="width: 40%; margin-left: 20%;">
+<div class="nested-fields">
+
+  <h2 class='nested-fields__association-title'><%= field.association_name.titleize %></h2>
 
   <%= f.fields_for field.association_name do |nested_form| %>
     <%= render(

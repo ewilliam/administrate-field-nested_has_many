@@ -1,19 +1,30 @@
 # Administrate::Field::NestedHasMany
 
-A plugin for nested has_many forms in [Administrate].
+A plugin for nested has_many forms in [Administrate], forked for rails 5 support.
 
 ## Usage
 
 Add to your `Gemfile`:
 
 ```ruby
-gem "administrate-field-nested_has_many", "~> 0.0.2"
+gem "administrate-field-nested_has_many",
+      git: "https://github.com/NedelescuVlad/administrate-field-nested_has_many"
 ```
 
 Run:
 
 ```bash
 $ bundle install
+```
+
+Add to your `application.js`:
+```
+//=require cocoon
+```
+
+Add to your `Foo` model:
+```ruby
+accepts_nested_attributes_for :bars
 ```
 
 Add to your `FooDashboard`:

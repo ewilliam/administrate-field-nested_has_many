@@ -1,6 +1,6 @@
 <div class="nested-fields" style="width:100%">
+  <% field.nested_fields_for_obj(f.object).each do |attribute| -%>
 
-  <% field.nested_fields.each do |attribute| -%>
     <div class="field-unit field-unit--<%= attribute.html_class %>">
       <%= render_field attribute, f: f %>
     </div>

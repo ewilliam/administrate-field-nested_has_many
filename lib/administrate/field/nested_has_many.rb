@@ -1,7 +1,6 @@
-require "administrate/field/has_many"
-require "administrate/page/form"
 require "rails"
-require "administrate/engine"
+require "administrate"
+require "administrate/field/has_many"
 require "cocoon"
 
 module Administrate
@@ -21,6 +20,12 @@ module Administrate
         end
       end
 
+      def nested_fields_for_obj(obj)
+        associated_form(obj).attributes.reject do |nested_field|
+          skipped_fields.include?(nested_field.attribute)
+        end
+      end
+
       def to_s
         data
       end
@@ -34,7 +39,7 @@ module Administrate
           dashboard_for_resource(associated_resource).new.permitted_attributes
       end
 
-      def self.permitted_attribute(associated_resource)
+      def self.permitted_attribute(associated_resource, options)
         {
           "#{associated_resource}_attributes".to_sym =>
           associated_attributes(associated_resource),
@@ -49,8 +54,8 @@ module Administrate
         associated_class_name.underscore.pluralize
       end
 
-      def associated_form
-        Administrate::Page::Form.new(associated_dashboard, association_name)
+      def associated_form(resource=association_name)
+        Administrate::Page::Form.new(associated_dashboard, resource)
       end
 
       private
