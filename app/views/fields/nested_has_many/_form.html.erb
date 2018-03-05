@@ -2,7 +2,7 @@
 
   <h2 class='nested-fields__association-title'><%= field.association_name.titleize %></h2>
 
-  <%= f.fields_for field.association_name do |nested_form| %>
+  <%= f.fields_for field.association_name, namespace: field.namespace_name do |nested_form| %>
     <%= render(
       partial: "fields/nested_has_many/fields",
       locals: {
